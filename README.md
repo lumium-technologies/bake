@@ -13,10 +13,10 @@ build:
 
 unlike with `Makefile`s, a target in a `Cakefile` does not represent a file on disk. that way, we can also remove the need for `.PHONY` targets in `Makefile`s. targets in `Cakefile`s really just represent a sequence of commands to run - that's it, that's the whole concept. by removing the notion of a target representing a file on disk, we can have our build system that is based on `make` still look like `make` and retain the intuition of `make`, but simplify the whole system dramatically.
 
-of course, targets can have other targets as dependencies, and even have nested targets, individual files or even globs as dependencies:
+of course, targets can have other targets as dependencies, and even have nested targets, individual files or even globs as dependencies and outputs. output files are specified after a minus after the dependency list:
 
 ```
-build: module1::build module2::build "object-file1.o" "object-file2.o"
+build: module1::build module2::build "object-file1.o" "object-file2.o" - "object"
     # link objects produced by module1::build and module2::build
     # with "object-file1.o" and "object-file2.o" to create one single relocatable object file
 ```
